@@ -1,0 +1,6 @@
+# Built executables
+out
+
+# Intermediate files
+*.hi
+*.o
