@@ -23,7 +23,9 @@
               pkgs.just # A simple command runner
               pkgs.ghc # The Glasgow Haskell Compiler
               pkgs.haskell-language-server
-              pkgs.haskellPackages.Cabal_3_12_1_0 # Build tooling and dependency manager
+              # TODO figure out the correct package for the build system
+              # research differences between Cabal and Stack
+              #pkgs.haskellPackages.Cabal_3_12_1_0 # Build tooling and dependency manager
             ];
           };
         }
