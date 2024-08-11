@@ -1,38 +1,60 @@
+-- Not going to lie. I don't really understand this yet
+-- https://learn-haskell.blog/03-html/04-safer_construction.html
+newtype Html = Html String
+
+newtype Structure = Structure String
+
+getStructureString :: Structure -> String
+getStructureString struct =
+  case struct of
+    Structure str -> str
+
+-- Type Alias
+type Title = String
+
 -- The main entry point of a haskell program
 main :: IO ()
-main = putStrLn html
+main = putStrLn (render_ html)
 
-html :: String
+-- html :: Html
 html =
-  makeHtml
-    "The Functional Way"
-    ( h1_ "The Functional Way"
-        <> p_ "Checking this out"
+  html_
+    "Some title"
+    ( append_
+        (h1_ "Some heading")
+        ( append_
+            (p_ "A paragraph")
+            (p_ "Another paragrap")
+        )
     )
 
--- The compositional pattern in use here seems rather unfortunate
--- will have to research what patterns are common, how flexible the
--- language is and how relationships and partial evaluations can be expressed
-makeHtml :: String -> String -> String
-makeHtml title content = "<!DOCTYPE html>" ++ html_ (head_ (title_ title) <> body_ content)
+append_ :: Structure -> Structure -> Structure
+append_ contentA contentB =
+  Structure (getStructureString contentA <> getStructureString contentB)
+
+render_ :: Html -> String
+render_ html =
+  case html of
+    Html str -> str
+
+html_ :: Title -> Structure -> Html
+html_ title content =
+  Html
+    ( element
+        "html"
+        ( element "head" (element "title" title)
+            <> element "body" (getStructureString content)
+        )
+    )
 
 element :: String -> String -> String
 element tag content = "<" <> tag <> ">" <> content <> "</" <> tag <> ">"
 
-head_ :: String -> String
-head_ = element "head"
+title_ :: String -> Structure
+title_ = Structure . element "title"
 
-title_ :: String -> String
-title_ = element "title"
+h1_ :: String -> Structure
+h1_ = Structure . element "h1"
 
-html_ :: String -> String
-html_ = element "html"
-
-body_ :: String -> String
-body_ = element "body"
-
-h1_ :: String -> String
-h1_ = element "h1"
-
-p_ :: String -> String
-p_ = element "p"
+p_ :: String -> Structure
+p_ = Structure . element "p"

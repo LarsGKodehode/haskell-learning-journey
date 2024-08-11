@@ -6,11 +6,11 @@ SRC_DIR := "src"
 # Build command
 build experiment:
   mkdir -p {{ OUT_DIR }} # Create output directory if it doesn't exist
-  ghc {{ GHC_FLAGS }} -o {{ OUT_DIR }}/{{ experiment }} {{ SRC_DIR}}/{{ experiment }}/main.hs
+  ghc {{ GHC_FLAGS }} -o {{ OUT_DIR }}/{{ experiment }} {{ SRC_DIR}}/{{ experiment }}/Main.hs
 
 # Run command
 run experiment:
-  runghc {{ SRC_DIR }}/{{ experiment }}/main.hs
+  runghc {{ SRC_DIR }}/{{ experiment }}/Main.hs
 
 # Clean command
 clean:
