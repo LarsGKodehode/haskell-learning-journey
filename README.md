@@ -4,6 +4,7 @@ This is me trying to figure out how to use Haskell to define Domain Specific Lan
 Along with just understanding the tooling around it.
 
 ## Goals
+
 - [ ] Figure out Haskell's dependencies management
 - [ ] Compile a program
 - [ ] Figure out how to create intermediate (cached/memoized) libraries
@@ -58,4 +59,3 @@ Along with just understanding the tooling around it.
 
 - [Hackage](https://hackage.haskell.org/)
   Hackage is the Haskell's community package archive.
-
